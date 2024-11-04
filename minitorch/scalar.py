@@ -176,9 +176,12 @@ class Scalar:
         # TODO: Implement for Task 1.3.
         res = []
         derivatives = h.last_fn.backward(h.ctx, d_output)
+        if type(derivatives) is float or type(derivatives) is int: 
+            derivatives = [derivatives]
 
         for id, input in enumerate(h.inputs):
-            res.append((input.name, derivatives[id]))
+            if type(input) is Scalar:
+                res.append((input, derivatives[id]))
         return res
 
     def backward(self, d_output: Optional[float] = None) -> None:
