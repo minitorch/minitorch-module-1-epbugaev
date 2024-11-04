@@ -52,7 +52,6 @@ class Linear(minitorch.Module):
         return res
 
 
-
 def default_log_fn(epoch, total_loss, correct, losses):
     print("Epoch ", epoch, " loss ", total_loss, "correct", correct)
 

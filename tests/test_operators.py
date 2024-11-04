@@ -110,14 +110,14 @@ def test_sigmoid(a: float) -> None:
     * It is  strictly increasing.
     """
     # TODO: Implement for Task 0.2.
-    assert(sigmoid(a) >= 0.0 and sigmoid(a) <= 1.0)
-    assert(abs(sigmoid(-a) - (1 - sigmoid(a))) < EPS)
-    assert(sigmoid(0) == 0.5)
+    assert (sigmoid(a) >= 0.0 and sigmoid(a) <= 1.0)
+    assert (abs(sigmoid(-a) - (1 - sigmoid(a))) < EPS)
+    assert (sigmoid(0) == 0.5)
 
     if abs(a) < 5:
-        assert(sigmoid(a) < sigmoid(a + 1.0))
-    else: 
-        assert(sigmoid(a) <= sigmoid(a + 1.0))
+        assert (sigmoid(a) < sigmoid(a + 1.0))
+    else:
+        assert (sigmoid(a) <= sigmoid(a + 1.0))
 
 
 @pytest.mark.task0_2
@@ -125,8 +125,8 @@ def test_sigmoid(a: float) -> None:
 def test_transitive(a: float, b: float, c: float) -> None:
     """Test the transitive property of less-than (a < b and b < c implies a < c)"""
     # TODO: Implement for Task 0.2.
-    if a < b and b < c: 
-        assert(a < c)
+    if a < b and b < c:
+        assert (a < c)
 
 
 @pytest.mark.task0_2
@@ -136,7 +136,7 @@ def test_symmetric(a: float, b: float) -> None:
     gives the same value regardless of the order of its input.
     """
     # TODO: Implement for Task 0.2.
-    assert(abs(mul(a, b) - mul(b, a)) < EPS)
+    assert (abs(mul(a, b) - mul(b, a)) < EPS)
 
 
 @pytest.mark.task0_2
@@ -146,7 +146,7 @@ def test_distribute(a: float, b: float, c: float) -> None:
     :math:`z \times (x + y) = z \times x + z \times y`
     """
     # TODO: Implement for Task 0.2.
-    assert(abs(a * (b + c) - (a * b + a * c)) < EPS)
+    assert (abs(a * (b + c) - (a * b + a * c)) < EPS)
 
 
 @pytest.mark.task0_2
@@ -154,7 +154,7 @@ def test_distribute(a: float, b: float, c: float) -> None:
 def test_other(a, b) -> None:
     """Write a test that ensures some other property holds for your functions."""
     # TODO: Implement for Task 0.2.
-    assert(abs(add(a, add(b, b)) - add(a, mul(b, 2))) < EPS)
+    assert (abs(add(a, add(b, b)) - add(a, mul(b, 2))) < EPS)
 
 
 # ## Task 0.3  - Higher-order functions
@@ -181,7 +181,7 @@ def test_sum_distribute(ls1: List[float], ls2: List[float]) -> None:
     """Write a test that ensures that the sum of `ls1` plus the sum of `ls2`
     is the same as the sum of each element of `ls1` plus each element of `ls2`.
     """
-    assert(abs(sum(ls1) + sum(ls2) - sum(addLists(ls1, ls2))) < EPS)
+    assert (abs(sum(ls1) + sum(ls2) - sum(addLists(ls1, ls2))) < EPS)
 
 
 @pytest.mark.task0_3

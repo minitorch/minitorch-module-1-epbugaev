@@ -69,15 +69,15 @@ def sigmoid(a):
     return 1 / (1 + math.exp(-1 * a))
 
 
-def relu(a):
-    return max(0, a)
+def relu(a: float) -> float:
+    return max(0.0, a)
 
 
-def log(a):
+def log(a) -> float:
     return math.log(a)
 
 
-def exp(a):
+def exp(a) -> float:
     return math.exp(a)
 
 
@@ -116,17 +116,17 @@ def relu_back(a, b):
 
 
 # TODO: Implement for Task 0.3.
-def map(f: Callable, a: Iterable):
+def map(f: Callable, a: Iterable) -> Iterable:
     for item in a:
         yield f(item)
 
 
-def zipWith(f: Callable, a: Iterable, b: Iterable):
+def zipWith(f: Callable, a: Iterable, b: Iterable) -> Iterable:
     for item_a, item_b in zip(a, b):
         yield f(item_a, item_b)
 
 
-def reduce(f: Callable, a: Iterable):
+def reduce(f: Callable, a: Iterable) -> Iterable:
     res = None
     for item in a:
         if res is None:
@@ -136,20 +136,20 @@ def reduce(f: Callable, a: Iterable):
     return res
 
 
-def negList(a: list):
+def negList(a: list) -> Iterable:
     return list(map(neg, a))
 
 
-def addLists(a: Iterable, b: Iterable):
+def addLists(a: Iterable, b: Iterable) -> Iterable:
     return zipWith(add, a, b)
 
 
-def sum(a: Iterable):
+def sum(a: Iterable) -> Iterable:
     res = reduce(add, a)
     if res is None:
         return 0
     return res
 
 
-def prod(a: Iterable):
+def prod(a: Iterable) -> Iterable:
     return reduce(mul, a)

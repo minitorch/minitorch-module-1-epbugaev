@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from typing import Any, Iterable, Tuple
-from collections import defaultdict 
+from collections import defaultdict
 
 from typing_extensions import Protocol
 
@@ -103,14 +103,13 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     derivatives = defaultdict(float)
     derivatives[variable.name] = deriv
 
-    for var in top_sort: 
-        #print('var name:', var.name, 'history', var.history.last_fn)
-        if var.history.last_fn is None: 
+    for var in top_sort:
+        if var.history.last_fn is None:
             var.accumulate_derivative(derivatives[var.name])
             continue
 
         chain_rule_res = var.chain_rule(derivatives[var.name])
-        for input, der in chain_rule_res: 
+        for input, der in chain_rule_res:
             derivatives[input.name] += der
 
 
