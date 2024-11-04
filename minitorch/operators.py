@@ -58,9 +58,9 @@ def is_close(a, b):
     return abs(a - b) < 1e-2
 
 def sigmoid(a):
-    if a < 0:
-        return 1 / (1 + math.exp(-1 * a))
-    return math.exp(a) / (1 + math.exp(a))
+    #if a < 0:
+    return 1 / (1 + math.exp(-1 * a))
+   #return math.exp(a) / (1 + math.exp(a))
 
 def relu(a):
     return max(0, a)
