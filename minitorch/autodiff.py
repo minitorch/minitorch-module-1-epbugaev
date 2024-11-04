@@ -1,5 +1,6 @@
 from dataclasses import dataclass
-from typing import Any, Iterable, List, Tuple
+from typing import Any, Iterable, Tuple
+from collections import defaultdict
 
 from typing_extensions import Protocol
 
@@ -23,7 +24,10 @@ def central_difference(f: Any, *vals: Any, arg: int = 0, epsilon: float = 1e-6) 
         An approximation of $f'_i(x_0, \ldots, x_{n-1})$
     """
     # TODO: Implement for Task 1.1.
-    raise NotImplementedError("Need to implement for Task 1.1")
+    new_vals = list(vals)
+    new_vals[arg] = new_vals[arg] + epsilon
+    print('new_vals:', new_vals, 'vals', vals)
+    return (f(*new_vals) - f(*vals)) / epsilon
 
 
 variable_count = 1
@@ -51,6 +55,17 @@ class Variable(Protocol):
         pass
 
 
+def _dfs_topological_sort(variable: Variable, history_list: Iterable[Variable], names_list: Iterable[str]):
+    inputs = variable.history.inputs
+
+    for input in inputs:
+        if input.name not in names_list:
+            _dfs_topological_sort(input, history_list, names_list)
+
+    history_list.append(variable)
+    names_list.append(variable.name)
+
+
 def topological_sort(variable: Variable) -> Iterable[Variable]:
     """
     Computes the topological order of the computation graph.
@@ -62,7 +77,10 @@ def topological_sort(variable: Variable) -> Iterable[Variable]:
         Non-constant Variables in topological order starting from the right.
     """
     # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
+    history_list = []
+    names_list = []
+    _dfs_topological_sort(variable, history_list, names_list)
+    return history_list
 
 
 def backpropagate(variable: Variable, deriv: Any) -> None:
@@ -77,7 +95,22 @@ def backpropagate(variable: Variable, deriv: Any) -> None:
     No return. Should write to its results to the derivative values of each leaf through `accumulate_derivative`.
     """
     # TODO: Implement for Task 1.4.
-    raise NotImplementedError("Need to implement for Task 1.4")
+    top_sort = topological_sort(variable)
+    top_sort = reversed(top_sort)
+
+    if deriv is None:
+        deriv = 1.0
+    derivatives = defaultdict(float)
+    derivatives[variable.name] = deriv
+
+    for var in top_sort:
+        if var.history.last_fn is None:
+            var.accumulate_derivative(derivatives[var.name])
+            continue
+
+        chain_rule_res = var.chain_rule(derivatives[var.name])
+        for input, der in chain_rule_res:
+            derivatives[input.name] += der
 
 
 @dataclass
