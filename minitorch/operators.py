@@ -73,7 +73,7 @@ def relu(a):
     return max(0, a)
 
 
-def log(a): 
+def log(a):
     return math.log(a)
 
 
@@ -117,7 +117,7 @@ def relu_back(a, b):
 
 # TODO: Implement for Task 0.3.
 def map(f: Callable, a: Iterable):
-    for item in a: 
+    for item in a:
         yield f(item)
 
 
@@ -131,7 +131,7 @@ def reduce(f: Callable, a: Iterable):
     for item in a:
         if res is None:
             res = item
-        else: 
+        else:
             res = f(res, item)
     return res
 

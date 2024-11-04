@@ -33,14 +33,14 @@ class Module:
         """Set the mode of this module and all descendent modules to `train`."""
         # TODO: Implement for Task 0.4.
         self.training = True
-        for child_name in self._modules: 
+        for child_name in self._modules:
             self._modules[child_name].train()
 
     def eval(self) -> None:
         """Set the mode of this module and all descendent modules to `eval`."""
         # TODO: Implement for Task 0.4.
         self.training = False
-        for child_name in self._modules: 
+        for child_name in self._modules:
             self._modules[child_name].eval()
 
     def named_parameters(self) -> Sequence[Tuple[str, Parameter]]:
